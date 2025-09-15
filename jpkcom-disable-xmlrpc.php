@@ -25,7 +25,7 @@ if ( ! defined( constant_name: 'WPINC' ) ) {
 add_filter( 'xmlrpc_enabled', '__return_false', 1 );
 
 add_action( 'init', function(): void {
-    if ( strpos( haystack: $_SERVER['REQUEST_URI'], needle: 'xmlrpc.php' ) !== false ) {
+    if ( strpos( haystack: $_SERVER['REQUEST_URI'], needle: '/xmlrpc.php' ) !== false ) {
         wp_die( 'XML-RPC is disabled.', 'Error', array( 'response' => 403 ) );
     }
 });
