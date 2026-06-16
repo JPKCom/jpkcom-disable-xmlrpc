@@ -16,6 +16,8 @@ License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 */
 
+declare(strict_types=1);
+
 if ( ! defined( constant_name: 'WPINC' ) ) {
   die;
 }
@@ -70,10 +72,10 @@ add_filter( 'xmlrpc_methods', '__return_empty_array', 1 );
  * @since 1.0.0
  *
  * @param string $class The XML-RPC server class name.
- * @return void
+ * @return never
  */
-add_filter( 'wp_xmlrpc_server_class', function( $class ): void {
-    wp_die( 'XML-RPC is disabled.', 'Error', array( 'response' => 403 ) );
+add_filter( 'wp_xmlrpc_server_class', function( string $class ): never {
+    wp_die( esc_html__( 'XML-RPC is disabled.', 'jpkcom-disable-xmlrpc' ), esc_html__( 'Error', 'jpkcom-disable-xmlrpc' ), array( 'response' => 403 ) );
 });
 
 /**
@@ -84,7 +86,10 @@ add_filter( 'wp_xmlrpc_server_class', function( $class ): void {
  * @return void
  */
 add_action( 'init', function(): void {
-    if ( isset( $_SERVER['SCRIPT_FILENAME'] ) && basename( path: $_SERVER['SCRIPT_FILENAME'] ) === 'xmlrpc.php' ) {
-        wp_die( 'XML-RPC is disabled.', 'Error', array( 'response' => 403 ) );
+    if ( isset( $_SERVER['SCRIPT_FILENAME'] ) ) {
+        $jpkcom_script = sanitize_text_field( wp_unslash( $_SERVER['SCRIPT_FILENAME'] ) );
+        if ( basename( path: $jpkcom_script ) === 'xmlrpc.php' ) {
+            wp_die( esc_html__( 'XML-RPC is disabled.', 'jpkcom-disable-xmlrpc' ), esc_html__( 'Error', 'jpkcom-disable-xmlrpc' ), array( 'response' => 403 ) );
+        }
     }
 });

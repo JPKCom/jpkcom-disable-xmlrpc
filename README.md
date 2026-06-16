@@ -38,6 +38,7 @@ Disables the WordPress XML-RPC.
 * Raised the minimum WordPress version to 6.9 and "Tested up to" to WordPress 7.0
 * Switched license metadata to the SPDX identifier `GPL-2.0-or-later` with the HTTPS license URI
 * Added PHPDoc-generated API documentation, built and deployed to gh-pages on release
+* Hardening: enabled `declare(strict_types=1)`, typed the callbacks, sanitized `$_SERVER` access and made the notice translatable
 
 ### 1.0.1
 * Extended functionality
