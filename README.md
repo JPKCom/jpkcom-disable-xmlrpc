@@ -3,7 +3,7 @@
 **Plugin Name:** JPKCom Disable XML-RPC  
 **Plugin URI:** https://github.com/JPKCom/jpkcom-disable-xmlrpc  
 **Description:** Globally disable XML-RPC.  
-**Version:** 1.0.2  
+**Version:** 1.0.3  
 **Author:** Jean Pierre Kolb <jpk@jpkc.com>  
 **Author URI:** https://www.jpkc.com  
 **Contributors:** JPKCom  
@@ -11,7 +11,7 @@
 **Requires at least:** 6.9  
 **Tested up to:** 7.0  
 **Requires PHP:** 8.3  
-**Stable tag:** 1.0.2  
+**Stable tag:** 1.0.3  
 **License:** GPL-2.0-or-later  
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -23,6 +23,12 @@ Globally disable XML-RPC.
 Disables the WordPress XML-RPC.
 
 
+### Documentation
+
+**API Documentation:** Complete PHPDoc-generated API documentation is available at:
+[https://jpkcom.github.io/jpkcom-disable-xmlrpc/docs/](https://jpkcom.github.io/jpkcom-disable-xmlrpc/docs/)
+
+
 ## Installation
 
 1. In your admin panel, go to 'Plugins' > and click the 'Add New' button.
@@ -31,6 +37,9 @@ Disables the WordPress XML-RPC.
 
 
 ## Changelog
+
+### 1.0.3
+* Docs: linked the published PHPDoc API documentation
 
 ### 1.0.2
 * Added secure self-hosted plugin updates via GitHub with SHA256 checksum verification
