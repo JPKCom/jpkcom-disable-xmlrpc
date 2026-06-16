@@ -23,6 +23,8 @@ if ( ! defined( constant_name: 'WPINC' ) ) {
 
 /**
  * Plugin Constants
+ *
+ * @since 1.0.2
  */
 if ( ! defined( 'JPKCOM_DISABLE_XMLRPC_VERSION' ) ) {
     define( 'JPKCOM_DISABLE_XMLRPC_VERSION', '1.0.2' );
@@ -33,6 +35,10 @@ if ( ! defined( 'JPKCOM_DISABLE_XMLRPC_VERSION' ) ) {
  * Initialize Plugin Updater
  *
  * Loads and initializes the GitHub-based plugin updater with SHA256 checksum verification.
+ *
+ * @since 1.0.2
+ *
+ * @return void
  */
 add_action( 'init', static function (): void {
     $updater_file = plugin_dir_path( __FILE__ ) . 'includes/class-plugin-updater.php';
@@ -50,13 +56,33 @@ add_action( 'init', static function (): void {
     }
 }, 5 );
 
+/**
+ * Disable the XML-RPC interface and strip all of its methods.
+ *
+ * @since 1.0.0
+ */
 add_filter( 'xmlrpc_enabled', '__return_false', 1 );
 add_filter( 'xmlrpc_methods', '__return_empty_array', 1 );
 
+/**
+ * Block instantiation of the XML-RPC server class.
+ *
+ * @since 1.0.0
+ *
+ * @param string $class The XML-RPC server class name.
+ * @return void
+ */
 add_filter( 'wp_xmlrpc_server_class', function( $class ): void {
     wp_die( 'XML-RPC is disabled.', 'Error', array( 'response' => 403 ) );
 });
 
+/**
+ * Reject direct requests to xmlrpc.php with a 403 response.
+ *
+ * @since 1.0.0
+ *
+ * @return void
+ */
 add_action( 'init', function(): void {
     if ( isset( $_SERVER['SCRIPT_FILENAME'] ) && basename( path: $_SERVER['SCRIPT_FILENAME'] ) === 'xmlrpc.php' ) {
         wp_die( 'XML-RPC is disabled.', 'Error', array( 'response' => 403 ) );
