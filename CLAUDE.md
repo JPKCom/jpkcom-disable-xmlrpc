@@ -43,7 +43,7 @@ Main file (jpkcom-disable-xmlrpc.php)
 
 | Constant | Value | Purpose |
 |----------|-------|---------|
-| `JPKCOM_DISABLE_XMLRPC_VERSION` | `'1.0.4'` | Plugin version (sync with header/README/phpdoc.xml) |
+| `JPKCOM_DISABLE_XMLRPC_VERSION` | `'1.0.5'` | Plugin version (sync with header/README/phpdoc.xml) |
 
 ---
 
