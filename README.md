@@ -3,7 +3,7 @@
 **Plugin Name:** JPKCom Disable XML-RPC  
 **Plugin URI:** https://github.com/JPKCom/jpkcom-disable-xmlrpc  
 **Description:** Globally disable XML-RPC.  
-**Version:** 1.0.8  
+**Version:** 1.0.9  
 **Author:** Jean Pierre Kolb <jpk@jpkc.com>  
 **Author URI:** https://www.jpkc.com  
 **Contributors:** JPKCom  
@@ -11,7 +11,7 @@
 **Requires at least:** 6.9  
 **Tested up to:** 7.1  
 **Requires PHP:** 8.3  
-**Stable tag:** 1.0.8  
+**Stable tag:** 1.0.9  
 **License:** GPL-2.0-or-later  
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,6 +21,10 @@ Globally disable XML-RPC.
 ## Description
 
 Disables the WordPress XML-RPC.
+
+Requests to `xmlrpc.php` are answered with HTTP 403 and an XML-RPC fault, so clients get a parseable refusal rather than a silent empty response. The `xmlrpc_enabled` flag is off, the method list is empty, and instantiation of the XML-RPC server class is blocked as a last resort. The site also stops advertising the endpoint: neither the `X-Pingback` HTTP header nor a `<link rel="pingback">` tag is emitted any more.
+
+**Please note:** pingbacks arrive over XML-RPC and are therefore no longer accepted. Because WordPress gates both mechanisms on the same `pings_open()` check, **trackbacks are refused as well**.
 
 
 ### Documentation
@@ -37,6 +41,13 @@ Disables the WordPress XML-RPC.
 
 
 ## Changelog
+
+### 1.0.9
+* Fixed: `xmlrpc.php` answered with a bare HTTP 200 and an empty body instead of the documented 403. With `XMLRPC_REQUEST` defined, `wp_die()` dispatches to `_xmlrpc_wp_die_handler()`, which writes nothing unless the global `$wp_xmlrpc_server` already exists — `xmlrpc.php` creates it after `init` — and never calls `status_header()`. The plugin now sends the 403 itself, together with a proper XML-RPC fault body so clients get a parseable answer
+* Fixed: the site kept advertising the endpoint it refuses. WordPress sends `X-Pingback: <site>/xmlrpc.php` on singular views and themes emit `<link rel="pingback">`; both are gated on `pings_open()`, which this plugin did not filter. Note the side effect: `pings_open()` also governs `wp-trackback.php`, so trackbacks are now refused as well — deliberate, on the assumption that a site turning off XML-RPC does not want trackbacks either
+* Changed: the request is identified by the `XMLRPC_REQUEST` constant, which `xmlrpc.php` defines before `wp-load.php` runs, instead of by `basename( $_SERVER['SCRIPT_FILENAME'] )`. The old check depended on how a given SAPI populates that variable and pushed a filesystem path through `sanitize_text_field()`, which strips tags and `%xx` sequences from it
+* Changed: the guard runs at `init` priority 0, ahead of the updater bootstrap, so a refused request does no further work. `xmlrpc_enabled` and `xmlrpc_methods` moved from priority 1 to `PHP_INT_MAX`
+* Added: `tests/test-hooks.php` covers the hook surface, the request detection and the fault body; CI runs it on every pull request and push to `main`
 
 ### 1.0.8
 * Fixed: the update manifest no longer reports `network: true` for this plugin. The generator defaulted a missing `Network:` header to true, while WordPress' own default for a missing header is "not network-only". Metadata only — WordPress derives network-only from the plugin header via `is_network_only_plugin()`, not from the update manifest
