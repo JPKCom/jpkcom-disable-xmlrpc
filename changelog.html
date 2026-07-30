@@ -1,4 +1,38 @@
-<h3 id="section">1.0.8</h3>
+<h3 id="section">1.0.9</h3>
+<ul>
+<li>Fixed: <code>xmlrpc.php</code> answered with a bare HTTP 200 and an
+empty body instead of the documented 403. With
+<code>XMLRPC_REQUEST</code> defined, <code>wp_die()</code> dispatches to
+<code>_xmlrpc_wp_die_handler()</code>, which writes nothing unless the
+global <code>$wp_xmlrpc_server</code> already exists —
+<code>xmlrpc.php</code> creates it after <code>init</code> — and never
+calls <code>status_header()</code>. The plugin now sends the 403 itself,
+together with a proper XML-RPC fault body so clients get a parseable
+answer</li>
+<li>Fixed: the site kept advertising the endpoint it refuses. WordPress
+sends <code>X-Pingback: &lt;site&gt;/xmlrpc.php</code> on singular views
+and themes emit <code>&lt;link rel="pingback"&gt;</code>; both are gated
+on <code>pings_open()</code>, which this plugin did not filter. Note the
+side effect: <code>pings_open()</code> also governs
+<code>wp-trackback.php</code>, so trackbacks are now refused as well —
+deliberate, on the assumption that a site turning off XML-RPC does not
+want trackbacks either</li>
+<li>Changed: the request is identified by the
+<code>XMLRPC_REQUEST</code> constant, which <code>xmlrpc.php</code>
+defines before <code>wp-load.php</code> runs, instead of by
+<code>basename( $_SERVER['SCRIPT_FILENAME'] )</code>. The old check
+depended on how a given SAPI populates that variable and pushed a
+filesystem path through <code>sanitize_text_field()</code>, which strips
+tags and <code>%xx</code> sequences from it</li>
+<li>Changed: the guard runs at <code>init</code> priority 0, ahead of
+the updater bootstrap, so a refused request does no further work.
+<code>xmlrpc_enabled</code> and <code>xmlrpc_methods</code> moved from
+priority 1 to <code>PHP_INT_MAX</code></li>
+<li>Added: <code>tests/test-hooks.php</code> covers the hook surface,
+the request detection and the fault body; CI runs it on every pull
+request and push to <code>main</code></li>
+</ul>
+<h3 id="section-1">1.0.8</h3>
 <ul>
 <li>Fixed: the update manifest no longer reports
 <code>network: true</code> for this plugin. The generator defaulted a
@@ -14,7 +48,7 @@ repository are now English throughout, and the developer notes in
 <code>CLAUDE.md</code> were translated and trimmed. No effect on the
 shipped plugin</li>
 </ul>
-<h3 id="section-1">1.0.7</h3>
+<h3 id="section-2">1.0.7</h3>
 <ul>
 <li>Changed: <code>Tested up to</code> raised to WordPress 7.1</li>
 <li>Changed: the bundled updater’s runtime floor now matches the
@@ -26,7 +60,7 @@ and <code>tested</code> now say 6.9 and 7.1. They only apply when the
 README metadata cannot be read, but a stale fallback would have
 published a minimum the plugin no longer supports</li>
 </ul>
-<h3 id="section-2">1.0.6</h3>
+<h3 id="section-3">1.0.6</h3>
 <ul>
 <li>Added: plugin banners (<code>assets/banner-1544x500.avif</code>,
 <code>assets/banner-772x250.avif</code>) — a plain <code>#3c4955</code>
@@ -34,7 +68,7 @@ surface with no lettering. The update manifest already advertised these
 two URLs, but nothing was published under them, so the plugin card in
 wp-admin had a broken banner</li>
 </ul>
-<h3 id="section-3">1.0.5</h3>
+<h3 id="section-4">1.0.5</h3>
 <ul>
 <li>CI: the release step no longer copies the staging directory into
 itself, so the ZIP has no empty
@@ -47,7 +81,7 @@ to full commit SHAs</li>
 <li>CI: security and regression tests now run on every pull request,
 where a plugin has them</li>
 </ul>
-<h3 id="section-4">1.0.4</h3>
+<h3 id="section-5">1.0.4</h3>
 <ul>
 <li>Security: update packages are now verified <em>before</em>
 installation — the verified file is handed to WordPress instead of being
@@ -72,11 +106,11 @@ instead of being retried on every admin request</li>
 <li>Added: CI workflow on every pull request (PHP lint, named-argument
 check, YAML validation, action-pinning guard)</li>
 </ul>
-<h3 id="section-5">1.0.3</h3>
+<h3 id="section-6">1.0.3</h3>
 <ul>
 <li>Docs: linked the published PHPDoc API documentation</li>
 </ul>
-<h3 id="section-6">1.0.2</h3>
+<h3 id="section-7">1.0.2</h3>
 <ul>
 <li>Added secure self-hosted plugin updates via GitHub with SHA256
 checksum verification</li>
@@ -92,11 +126,11 @@ gh-pages on release</li>
 callbacks, sanitized <code>$_SERVER</code> access and made the notice
 translatable</li>
 </ul>
-<h3 id="section-7">1.0.1</h3>
+<h3 id="section-8">1.0.1</h3>
 <ul>
 <li>Extended functionality</li>
 </ul>
-<h3 id="section-8">1.0.0</h3>
+<h3 id="section-9">1.0.0</h3>
 <ul>
 <li>Initial Release</li>
 </ul>

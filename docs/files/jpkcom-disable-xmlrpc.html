@@ -126,7 +126,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="namespaces/default.html#constant_JPKCOM_DISABLE_XMLRPC_VERSION">JPKCOM_DISABLE_XMLRPC_VERSION</a>
     <span>
-        &nbsp;: mixed&nbsp;= &#039;1.0.8&#039;                            </span>
+        &nbsp;: mixed&nbsp;= &#039;1.0.9&#039;                            </span>
 </dt>
 
     </dl>
@@ -134,6 +134,27 @@
 
 
 
+<h4 id="toc-functions">
+    Functions
+    <a href="files/jpkcom-disable-xmlrpc.html#toc-functions" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a class="" href="namespaces/default.html#function_jpkcom_disable_xmlrpc_is_xmlrpc_request">jpkcom_disable_xmlrpc_is_xmlrpc_request()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Whether the current request is being served by xmlrpc.php.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a class="" href="namespaces/default.html#function_jpkcom_disable_xmlrpc_fault_xml">jpkcom_disable_xmlrpc_fault_xml()</a>
+    <span>
+                                &nbsp;: string    </span>
+</dt>
+<dd>Build the XML-RPC fault sent in place of a served request.</dd>
+
+    </dl>
 
 
         
@@ -163,7 +184,7 @@
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">mixed</span>
     <span class="phpdocumentor-signature__name">JPKCOM_DISABLE_XMLRPC_VERSION</span>
-    = <span class="phpdocumentor-signature__default-value">&#039;1.0.8&#039;</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;1.0.9&#039;</span>
 </code>
 
 
@@ -175,7 +196,121 @@
     </article>
             </section>
 
-        
+            <section class="phpdocumentor-functions">
+        <h3 class="phpdocumentor-elements__header" id="functions">
+            Functions
+            <a href="files/jpkcom-disable-xmlrpc.html#functions" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_jpkcom_disable_xmlrpc_is_xmlrpc_request">
+        jpkcom_disable_xmlrpc_is_xmlrpc_request()
+        <a href="namespaces/default.html#function_jpkcom_disable_xmlrpc_is_xmlrpc_request" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="jpkcom-disable-xmlrpc.php"><a href="files/jpkcom-disable-xmlrpc.html">jpkcom-disable-xmlrpc.php</a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">77</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Whether the current request is being served by xmlrpc.php.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                    <span class="phpdocumentor-signature__name">jpkcom_disable_xmlrpc_is_xmlrpc_request</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+        <section class="phpdocumentor-description"><p><code class="prettyprint">XMLRPC_REQUEST</code> is defined at the top of <code class="prettyprint">xmlrpc.php</code>, before
+<code class="prettyprint">wp-load.php</code> runs, so it is set for every request that reaches the
+endpoint. Up to 1.0.8 this was derived from
+<code class="prettyprint">basename( $_SERVER['SCRIPT_FILENAME'] )</code> instead, which depends on how a
+given SAPI populates that variable, and the value was pushed through
+<code class="prettyprint">sanitize_text_field()</code> first - a function that strips tags and <code class="prettyprint">%xx</code>
+sequences and therefore alters a filesystem path rather than securing it.</p>
+</section>
+
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="function_jpkcom_disable_xmlrpc_is_xmlrpc_request_tags">
+        Tags
+        <a href="namespaces/default.html#function_jpkcom_disable_xmlrpc_is_xmlrpc_request_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.0.9</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>True when serving an XML-RPC request.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_jpkcom_disable_xmlrpc_fault_xml">
+        jpkcom_disable_xmlrpc_fault_xml()
+        <a href="namespaces/default.html#function_jpkcom_disable_xmlrpc_fault_xml" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="jpkcom-disable-xmlrpc.php"><a href="files/jpkcom-disable-xmlrpc.html">jpkcom-disable-xmlrpc.php</a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">93</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Build the XML-RPC fault sent in place of a served request.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                    <span class="phpdocumentor-signature__name">jpkcom_disable_xmlrpc_fault_xml</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+        <section class="phpdocumentor-description"><p>A fault response keeps the refusal machine-readable for XML-RPC clients,
+which cannot parse the HTML error page <code class="prettyprint">wp_die()</code> would normally produce.</p>
+</section>
+
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="function_jpkcom_disable_xmlrpc_fault_xml_tags">
+        Tags
+        <a href="namespaces/default.html#function_jpkcom_disable_xmlrpc_fault_xml_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.0.9</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>A complete XML-RPC <code class="prettyprint">methodResponse</code> fault document.</p>
+</section>
+
+            </section>
+
+</article>
+            </section>
+
         
     </article>
                                 </section>
@@ -189,7 +324,8 @@
             <li>
                 <ul class="phpdocumentor-list -clean">
                                                                                                                                                                     <li><a href="files/jpkcom-disable-xmlrpc.html#toc-constants">Constants</a></li>
-                                                        </ul>
+                                                                <li><a href="files/jpkcom-disable-xmlrpc.html#toc-functions">Functions</a></li>
+                                    </ul>
             </li>
 
                             <li class="phpdocumentor-on-this-page-section__title">Constants</li>
@@ -199,6 +335,13 @@
                                             </ul>
                 </li>
             
+                            <li class="phpdocumentor-on-this-page-section__title">Functions</li>
+                <li>
+                    <ul class="phpdocumentor-list -clean">
+                                                    <li class=""><a href="namespaces/default.html#function_jpkcom_disable_xmlrpc_fault_xml">jpkcom_disable_xmlrpc_fault_xml()</a></li>
+                                                    <li class=""><a href="namespaces/default.html#function_jpkcom_disable_xmlrpc_is_xmlrpc_request">jpkcom_disable_xmlrpc_is_xmlrpc_request()</a></li>
+                                            </ul>
+                </li>
                     </ul>
     </section>
 

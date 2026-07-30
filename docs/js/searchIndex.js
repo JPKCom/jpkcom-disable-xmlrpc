@@ -76,6 +76,16 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/default.html#constant_JPKCOM_DISABLE_XMLRPC_VERSION"
         },                {
+            "fqsen": "\\jpkcom_disable_xmlrpc_is_xmlrpc_request\u0028\u0029",
+            "name": "jpkcom_disable_xmlrpc_is_xmlrpc_request",
+            "summary": "Whether\u0020the\u0020current\u0020request\u0020is\u0020being\u0020served\u0020by\u0020xmlrpc.php.",
+            "url": "namespaces/default.html#function_jpkcom_disable_xmlrpc_is_xmlrpc_request"
+        },                {
+            "fqsen": "\\jpkcom_disable_xmlrpc_fault_xml\u0028\u0029",
+            "name": "jpkcom_disable_xmlrpc_fault_xml",
+            "summary": "Build\u0020the\u0020XML\u002DRPC\u0020fault\u0020sent\u0020in\u0020place\u0020of\u0020a\u0020served\u0020request.",
+            "url": "namespaces/default.html#function_jpkcom_disable_xmlrpc_fault_xml"
+        },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",

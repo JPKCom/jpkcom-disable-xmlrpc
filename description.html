@@ -1,4 +1,15 @@
 <p>Disables the WordPress XML-RPC.</p>
+<p>Requests to <code>xmlrpc.php</code> are answered with HTTP 403 and an
+XML-RPC fault, so clients get a parseable refusal rather than a silent
+empty response. The <code>xmlrpc_enabled</code> flag is off, the method
+list is empty, and instantiation of the XML-RPC server class is blocked
+as a last resort. The site also stops advertising the endpoint: neither
+the <code>X-Pingback</code> HTTP header nor a
+<code>&lt;link rel="pingback"&gt;</code> tag is emitted any more.</p>
+<p><strong>Please note:</strong> pingbacks arrive over XML-RPC and are
+therefore no longer accepted. Because WordPress gates both mechanisms on
+the same <code>pings_open()</code> check, <strong>trackbacks are refused
+as well</strong>.</p>
 <h3 id="documentation">Documentation</h3>
 <p><strong>API Documentation:</strong> Complete PHPDoc-generated API
 documentation is available at: <a
