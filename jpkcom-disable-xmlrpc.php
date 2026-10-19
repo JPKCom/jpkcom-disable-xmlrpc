@@ -3,7 +3,7 @@
 Plugin Name: JPKCom Disable XML-RPC
 Plugin URI: https://github.com/JPKCom/jpkcom-disable-xmlrpc
 Description: Globally disable XML-RPC.
-Version: 1.0.9
+Version: 1.0.10
 Author: Jean Pierre Kolb <jpk@jpkc.com>
 Author URI: https://www.jpkc.com
 Contributors: JPKCom
@@ -11,9 +11,10 @@ Tags: Security, XML, RPC, API, Plugin
 Requires at least: 6.9
 Tested up to: 7.1
 Requires PHP: 8.3
-Stable tag: 1.0.9
+Stable tag: 1.0.10
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Update URI: https://github.com/JPKCom/jpkcom-disable-xmlrpc
 */
 
 declare(strict_types=1);
@@ -29,7 +30,7 @@ if ( ! defined( constant_name: 'WPINC' ) ) {
  * @since 1.0.2
  */
 if ( ! defined( 'JPKCOM_DISABLE_XMLRPC_VERSION' ) ) {
-    define( 'JPKCOM_DISABLE_XMLRPC_VERSION', '1.0.9' );
+    define( 'JPKCOM_DISABLE_XMLRPC_VERSION', '1.0.10' );
 }
 
 

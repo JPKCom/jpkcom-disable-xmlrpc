@@ -3,7 +3,7 @@
 **Plugin Name:** JPKCom Disable XML-RPC  
 **Plugin URI:** https://github.com/JPKCom/jpkcom-disable-xmlrpc  
 **Description:** Globally disable XML-RPC.  
-**Version:** 1.0.9  
+**Version:** 1.0.10  
 **Author:** Jean Pierre Kolb <jpk@jpkc.com>  
 **Author URI:** https://www.jpkc.com  
 **Contributors:** JPKCom  
@@ -11,9 +11,10 @@
 **Requires at least:** 6.9  
 **Tested up to:** 7.1  
 **Requires PHP:** 8.3  
-**Stable tag:** 1.0.9  
+**Stable tag:** 1.0.10  
 **License:** GPL-2.0-or-later  
-**License URI:** https://www.gnu.org/licenses/gpl-2.0.html
+**License URI:** https://www.gnu.org/licenses/gpl-2.0.html  
+**Update URI:** https://github.com/JPKCom/jpkcom-disable-xmlrpc
 
 Globally disable XML-RPC.
 
@@ -41,6 +42,11 @@ Requests to `xmlrpc.php` are answered with HTTP 403 and an XML-RPC fault, so cli
 
 
 ## Changelog
+
+### 1.0.10
+* Security: the plugin header now carries `Update URI: https://github.com/JPKCom/jpkcom-disable-xmlrpc`. Without it, WordPress also asks wordpress.org for updates under this plugin's slug, so a same-named plugin published there with a higher version would be offered as an update of this one. With the header, wordpress.org answers nothing for this plugin and updates come only from this repository
+* Changed: the updater keeps its manifest cache, its failure marker and its fetch lock in site transients. On multisite the network now fetches the manifest once instead of once per site; on a single site nothing changes. The old per-site entries expire on their own within a day
+* Changed: the release workflow downloads phpDocumentor from a fixed GitHub release and verifies its SHA-256 before running it, instead of executing whatever phpdoc.org serves that day. No effect on the shipped plugin
 
 ### 1.0.9
 * Fixed: `xmlrpc.php` answered with a bare HTTP 200 and an empty body instead of the documented 403. With `XMLRPC_REQUEST` defined, `wp_die()` dispatches to `_xmlrpc_wp_die_handler()`, which writes nothing unless the global `$wp_xmlrpc_server` already exists — `xmlrpc.php` creates it after `init` — and never calls `status_header()`. The plugin now sends the 403 itself, together with a proper XML-RPC fault body so clients get a parseable answer
